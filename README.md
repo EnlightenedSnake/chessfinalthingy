@@ -1,2 +1,0 @@
-# chessfinalthingy
-thing thing

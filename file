@@ -1,0 +1,87 @@
+<style>
+  * {
+  	margin: 0;
+  }
+  body {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+  }
+  .chessboard-container {
+  	position: absolute;
+  	background-color:blue;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:67vw;
+    height:75vh;
+  }
+  .chesspieces-container {
+  	position: absolute;
+  	background-color:green;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:67vw;
+    height:25vh;
+    top:75vh;
+  }
+  .chesssquare {
+  	position: relative;
+    display: flex;
+    width: min(7vh,7vw);
+    height: min(7vh,7vw);
+    border: none;
+  }
+  .chesspieces-grid {
+  	position: relative;
+    display: inline-flex;
+    flex-wrap: wrap;
+    background-color:pink;
+    width: min(55.5vw,55.5vh);
+    height: min(17.5vw,17.5vh);  
+  }
+  .chessboard-grid {
+  	position: relative;
+    display: inline-flex;
+    flex-wrap: wrap;
+    background-color:pink;
+    width: min(56vw,56vh);
+    height: min(56vw,56vh);
+  }
+  .AI-container {
+  	position: absolute;
+  	background-color:red;
+    width:33vw;
+    height:100vh;
+    left:67vw;
+  }
+</style>
+
+<body>
+  <div class="chessboard-container">
+    <div class="chessboard-grid"></div>
+  </div>
+  <div class="chesspieces-container">
+    <div class="chesspieces-grid"></div>
+  </div>
+  <div class="AI-container"></div>
+</body>
+
+<script>
+		const chessBoardGrid = document.getElementsByClassName("chessboard-grid")[0],
+          chessPiecesGrid = document.getElementsByClassName("chesspieces-grid")[0];
+  			let chessboard = [[],[],[],[],[],[],[],[]];
+  			for(let chessCol = 0, letters = ["a","b","c","d","e","f","g","h"]; chessCol < 8; ++chessCol){
+          for(let chessRow = 0; chessRow < 8; ++chessRow){
+         		chessboard[chessCol][chessRow] = document.createElement("button");
+            chessBoardGrid.appendChild(chessboard[chessCol][chessRow]);
+            chessboard[chessCol][chessRow].className = "chesssquare";
+            chessboard[chessCol][chessRow].id = letters[chessCol] + (8-chessRow);
+            if((chessCol+chessRow)%2==0){
+            	chessboard[chessCol][chessRow].style.backgroundColor = "#fab37f";  
+            } else {
+              chessboard[chessCol][chessRow].style.backgroundColor = "#572400";
+            }
+          }
+        }
+  	
+</script>
