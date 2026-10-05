@@ -73,6 +73,44 @@
     height:100vh;
     left:67vw;
   }
+  .pastchessboarddorpbtn {
+  	position: relative;
+  	background-color:yellow;
+    width: 24vw;
+    height: 4vh;
+    top:2vh;
+    left:4.5vw;
+    border: none;
+  }
+  .dropdown-container {
+  	display: flex;
+  	position: relative;
+    visibility: hidden;
+  	left: 4.5vw;
+    top: 2vh;
+  	width: 24vw;
+    height: 20vh;
+    background-color: white;
+  }
+  .pastchessboards {
+  	position: relative;
+  	width: 24vw;
+    height: 4vh;
+  }
+  .askaibtn {
+  	position:relative;
+    left: 4vw;
+  	width: 25vw;
+    height: 12.5vh;
+  }
+  .airesponsetxt {
+  	position: relative;
+  	width: 30vw;
+    height: 40vh;
+    left: 1.5vw;
+    top: 10vh;
+    background-color:orange;
+  }
 </style>
 
 <body>
@@ -83,18 +121,21 @@
     <div class="chesspieces-grid"></div>
   </div>
   <div class="AI-container">
-  	<button class="dropdownbtn">
-      <div class="dropdown-container">
-        
-      </div>
-    </button>
+  	<button class="pastchessboarddorpbtn">Look at past positions!</button>
+    <div class="dropdown-container">
+      <button class="pastchessboards">Create a new position!</button>
+    </div>
+    <button class="askaibtn">Ask AI What the Best Move is!</button>
+    <div class="airesponsetxt"></div>
   </div>
 </body>
 
 <script>
 		const chessBoardGrid = document.getElementsByClassName("chessboard-grid")[0],
-          chessPiecesGrid = document.getElementsByClassName("chesspieces-grid")[0];
-  			let chessboard = [[],[],[],[],[],[],[],[]];
+          chessPiecesGrid = document.getElementsByClassName("chesspieces-grid")[0],
+          dropdownBtn = document.getElementsByClassName("pastchessboarddorpbtn")[0],
+          dropdownContainer = document.getElementsByClassName("dropdown-container")[0];
+  			var chessboard = [[],[],[],[],[],[],[],[]];
         for(let chessRow = 0; chessRow < 8; ++chessRow){
             for(let chessCol = 0, letters = ["a","b","c","d","e","f","g","h"]; chessCol < 8; ++chessCol){
          		chessboard[chessCol][chessRow] = document.createElement("button");
@@ -125,7 +166,15 @@
       chessCol.forEach(chessSquare => {
         chessSquare.onclick = () => {
           console.log(chessSquare.id);
-        };
+        }
       });
     });
+  	dropdownBtn.onclick = () => {
+      console.log(dropdownContainer.style.display);
+      if(dropdownContainer.style.visibility == "hidden"){
+     		dropdownContainer.style.visibility = "visible";
+      } else {
+        dropdownContainer.style.visibility = "hidden";
+      }
+    }
 </script>
