@@ -3,7 +3,7 @@
   	margin: 0;
   }
   body {
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
+  	font-size: min(10vh,10vw);
   }
   .chessboard-container {
   	position: absolute;
@@ -39,6 +39,25 @@
     width: min(55.5vw,55.5vh);
     height: min(17.5vw,17.5vh);  
   }
+  .chessboard-number {
+  	position: absolute;
+    width: 30%;
+    height: 30%;
+    font-size: min(1.75vh,1.75vw);
+    top: 5%;
+    left: -2.5%;
+  	pointer-events: none;
+  }
+  .chessboard-letter {
+  	position: absolute;
+    width: 30%;
+    height: 30%;
+    font-size: min(1.75vh,1.75vw);
+    right: 5%;
+    bottom: 0%;
+  	pointer-events: none;
+    
+  }
   .chessboard-grid {
   	position: relative;
     display: inline-flex;
@@ -63,15 +82,21 @@
   <div class="chesspieces-container">
     <div class="chesspieces-grid"></div>
   </div>
-  <div class="AI-container"></div>
+  <div class="AI-container">
+  	<button class="dropdownbtn">
+      <div class="dropdown-container">
+        
+      </div>
+    </button>
+  </div>
 </body>
 
 <script>
 		const chessBoardGrid = document.getElementsByClassName("chessboard-grid")[0],
           chessPiecesGrid = document.getElementsByClassName("chesspieces-grid")[0];
   			let chessboard = [[],[],[],[],[],[],[],[]];
-  			for(let chessCol = 0, letters = ["a","b","c","d","e","f","g","h"]; chessCol < 8; ++chessCol){
-          for(let chessRow = 0; chessRow < 8; ++chessRow){
+        for(let chessRow = 0; chessRow < 8; ++chessRow){
+            for(let chessCol = 0, letters = ["a","b","c","d","e","f","g","h"]; chessCol < 8; ++chessCol){
          		chessboard[chessCol][chessRow] = document.createElement("button");
             chessBoardGrid.appendChild(chessboard[chessCol][chessRow]);
             chessboard[chessCol][chessRow].className = "chesssquare";
@@ -81,7 +106,26 @@
             } else {
               chessboard[chessCol][chessRow].style.backgroundColor = "#572400";
             }
+            if(chessCol == 0) {
+              let numEle = document.createElement("div");
+              numEle.className = "chessboard-number";
+              numEle.innerText = (8-chessRow);
+              chessboard[chessCol][chessRow].appendChild(numEle);
+            }
+            if(chessRow == 7) {
+            	let letterEle = document.createElement("div");
+              letterEle.className = "chessboard-letter";
+              letterEle.innerText = letters[chessCol];
+              chessboard[chessCol][chessRow].appendChild(letterEle);
+            }
           }
         }
-  	
+  
+  	chessboard.forEach(chessCol => {
+      chessCol.forEach(chessSquare => {
+        chessSquare.onclick = () => {
+          console.log(chessSquare.id);
+        };
+      });
+    });
 </script>
