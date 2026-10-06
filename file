@@ -209,7 +209,6 @@
             }
           }
         }
-  		
   		for(let pieceColor = 0, colors = ["white","black"]; pieceColor < 2; ++pieceColor){
     		for(let pieceType = 0, types = ["pawn","knight","bishop","rook","queen","king"]; pieceType < 6; ++pieceType){
        		chesspieces[pieceColor][pieceType] = document.createElement("button");
@@ -224,6 +223,13 @@
         }
       });
     });
+  	chesspieces.forEach(color => {
+    	color.forEach(piece => {
+      	piece.onclick = () => {
+        	console.log( 
+        }
+      }
+    }
   	dropdownBtn.onclick = () => {
       if(dropdownContainer.style.visibility == "hidden"){
      		dropdownContainer.style.visibility = "visible";
