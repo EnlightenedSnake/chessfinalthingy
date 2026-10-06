@@ -143,7 +143,7 @@
 <script>
 		const chessBoardGrid = document.getElementsByClassName("chessboard-grid")[0],
           chessPiecesGrid = document.getElementsByClassName("chesspieces-grid")[0],
-          dropdownOptionsBtns = document.getElementsByClassName("pastchessboarddorpbtn"),
+          dropdownBtn = document.getElementsByClassName("pastchessboarddorpbtn")[0],
           dropdownContainer = document.getElementsByClassName("dropdown-container")[0],
           aiBtn = document.getElementsByClassName("askaibtn")[0],
           aiTxt = document.getElementsByClassName("airesponsetxt")[0];
