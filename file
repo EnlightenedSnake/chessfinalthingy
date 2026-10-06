@@ -40,6 +40,42 @@
   	background-color: #fab37f;
     color: black;
   }
+  .black-pawn {
+  	src = "blackpawnImg";
+  }
+  .black-knight {
+  	src = "blackknightImg";
+  }
+  .black-bishop {
+  	src = "blackbishopImg";
+  }
+  .black-rook {
+  	src = "blackrookImg";
+  }
+  .black-queen {
+  	src = "blackqueenImg";
+  }
+  .black-king {
+  	src = "blackkingImg";
+  }
+  .white-pawn {
+  	src = "whitepawnImg";
+  }
+  .white-knight {
+  	src = "whiteknightImg";
+  }
+  .white-bishop {
+  	src = "whitebishopImg";
+  }
+  .white-rook {
+  	src = "whiterookImg";
+  }
+  .white-queen {
+  	src = "whitequeenImg";
+  }
+  .white-king {
+  	src = "whitekingImg";
+  }
   .chesspieces-grid {
   	position: relative;
     display: inline-flex;
@@ -174,11 +210,10 @@
           }
         }
   		
-  		for(let pieceColor = 0, colors = [["white",["wPawnImg","wKnightImg","wBishopImg","wRookImg","wQueenImg","wKingImg"]],["black",["bPawnImg","bKnightImg","bBishopImg","bRookImg","bQueenImg","bKingImg"]]]; pieceColor < 2; ++pieceColor){
+  		for(let pieceColor = 0, colors = ["white","black"]; pieceColor < 2; ++pieceColor){
     		for(let pieceType = 0, types = ["pawn","knight","bishop","rook","queen","king"]; pieceType < 6; ++pieceType){
        		chesspieces[pieceColor][pieceType] = document.createElement("button");
-          chesspieces[pieceColor][pieceType].className = "chesssquare " + colors[pieceColor][0] + " " + types[pieceType];
-          //chesspieces[pieceColor][pieceType].src = colors[pieceColor][1][pieceType]; //Replace template imgs with imgs of the chess piece
+          chesspieces[pieceColor][pieceType].className = "chesssquare " + colors[pieceColor] /*+ " " + colors[pieceColor] + "-" + types[pieceType]*/; //Add when added imgs for pieces
 					chessPiecesGrid.appendChild(chesspieces[pieceColor][pieceType]);
       	}
       }
