@@ -30,14 +30,24 @@
     width: min(7vh,7vw);
     height: min(7vh,7vw);
     border: none;
+    object-fit: contain;
+  }
+  .black {
+  	background-color: #572400;
+    color: white;
+  }
+  .white {
+  	background-color: #fab37f;
+    color: black;
   }
   .chesspieces-grid {
   	position: relative;
     display: inline-flex;
     flex-wrap: wrap;
     background-color:pink;
-    width: min(55.5vw,55.5vh);
+    width: min(59.5vw,59.5vh);
     height: min(17.5vw,17.5vh);  
+    gap: min(3.5vw,3.5vh);
   }
   .chessboard-number {
   	position: absolute;
@@ -133,19 +143,21 @@
 <script>
 		const chessBoardGrid = document.getElementsByClassName("chessboard-grid")[0],
           chessPiecesGrid = document.getElementsByClassName("chesspieces-grid")[0],
-          dropdownBtn = document.getElementsByClassName("pastchessboarddorpbtn")[0],
-          dropdownContainer = document.getElementsByClassName("dropdown-container")[0];
-  			var chessboard = [[],[],[],[],[],[],[],[]];
+          dropdownOptionsBtns = document.getElementsByClassName("pastchessboarddorpbtn"),
+          dropdownContainer = document.getElementsByClassName("dropdown-container")[0],
+          aiBtn = document.getElementsByClassName("askaibtn")[0],
+          aiTxt = document.getElementsByClassName("airesponsetxt")[0];
+  			var chessboard = [[],[],[],[],[],[],[],[]],
+            chesspieces= [[],[]];
         for(let chessRow = 0; chessRow < 8; ++chessRow){
             for(let chessCol = 0, letters = ["a","b","c","d","e","f","g","h"]; chessCol < 8; ++chessCol){
          		chessboard[chessCol][chessRow] = document.createElement("button");
             chessBoardGrid.appendChild(chessboard[chessCol][chessRow]);
-            chessboard[chessCol][chessRow].className = "chesssquare";
             chessboard[chessCol][chessRow].id = letters[chessCol] + (8-chessRow);
             if((chessCol+chessRow)%2==0){
-            	chessboard[chessCol][chessRow].style.backgroundColor = "#fab37f";  
+            	chessboard[chessCol][chessRow].className = "chesssquare white";
             } else {
-              chessboard[chessCol][chessRow].style.backgroundColor = "#572400";
+              chessboard[chessCol][chessRow].className = "chesssquare black";
             }
             if(chessCol == 0) {
               let numEle = document.createElement("div");
@@ -161,7 +173,15 @@
             }
           }
         }
-  
+  		
+  		for(let pieceColor = 0, colors = [["white",["wPawnImg","wKnightImg","wBishopImg","wRookImg","wQueenImg","wKingImg"]],["black",["bPawnImg","bKnightImg","bBishopImg","bRookImg","bQueenImg","bKingImg"]]]; pieceColor < 2; ++pieceColor){
+    		for(let pieceType = 0, types = ["pawn","knight","bishop","rook","queen","king"]; pieceType < 6; ++pieceType){
+       		chesspieces[pieceColor][pieceType] = document.createElement("button");
+          chesspieces[pieceColor][pieceType].className = "chesssquare " + colors[pieceColor][0] + " " + types[pieceType];
+          //chesspieces[pieceColor][pieceType].src = colors[pieceColor][1][pieceType]; //Replace template imgs with imgs of the chess piece
+					chessPiecesGrid.appendChild(chesspieces[pieceColor][pieceType]);
+      	}
+      }
   	chessboard.forEach(chessCol => {
       chessCol.forEach(chessSquare => {
         chessSquare.onclick = () => {
@@ -170,7 +190,6 @@
       });
     });
   	dropdownBtn.onclick = () => {
-      console.log(dropdownContainer.style.display);
       if(dropdownContainer.style.visibility == "hidden"){
      		dropdownContainer.style.visibility = "visible";
       } else {
