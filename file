@@ -133,6 +133,9 @@
   }
   .dropdown-container {
   	display: flex;
+    flex-wrap: wrap;
+  	justify-content: flex-start;
+  	align-content: flex-start;
   	position: relative;
     visibility: hidden;
   	left: 4.5vw;
@@ -140,6 +143,7 @@
   	width: 24vw;
     height: 20vh;
     background-color: white;
+    overflow: scroll;
   }
   .pastchessboards {
   	position: relative;
@@ -214,6 +218,7 @@
           chessPiecesGrid = document.getElementsByClassName("chesspieces-grid")[0],
           dropdownBtn = document.getElementsByClassName("pastchessboarddorpbtn")[0],
           dropdownContainer = document.getElementsByClassName("dropdown-container")[0],
+          pastchessboards = document.getElementsByClassName("pastchessboards");
           kingdependBtns = Array.from(document.getElementsByClassName("kingdependentbtns-container")[0].children),
           aiTxt = document.getElementsByClassName("airesponsetxt")[0],
     			typeNameMap = new Map([["white-pawn",[0,0]],["white-knight",[0,1]],["white-bishop",[0,2]],["white-rook",[0,3]],["white-queen",[0,4]],["white-king",[0,5]],["black-pawn",[1,0]],["black-knight",[1,1]],["black-bishop",[1,2]],["black-rook",[1,3]],["black-queen",[1,4]],["black-king",[1,5]]]);
@@ -253,6 +258,7 @@
         chessPiecesGrid.appendChild(chesspieces[pieceColor][pieceType]);
       }
     }
+  
   	function unselectPiece(){
     	if(selectedPiece != "none"){
       	 let pos = typeNameMap.get(selectedPiece);
@@ -275,6 +281,14 @@
         kingdependBtns.forEach(button => button.disabled = true);
       }
     }
+  	function clearBoard(){
+    	chessboard.forEach(chessCol => {
+      	chessCol.forEach(square => {
+        	square.classList.replace(square.classList[2], "nopiece");
+        });
+      });
+    }
+  
   	chessboard.forEach(chessCol => {
       chessCol.forEach(chessSquare => {
         chessSquare.onclick = () => {
@@ -319,6 +333,10 @@
     }
     kingdependBtns[0].onclick = () => {
      	if(selectedColor != "none"){
+        let temp = document.createElement("button");
+        temp.className = "pastchessboards";
+        temp.innerText = "Chessboard #" + pastchessboards.length;
+        pastchessboards[0].insertAdjacentElement("afterend",temp);
       	//ai button stuff 
       }
     }
@@ -327,5 +345,18 @@
     	 	kingdependBtns[numColor].classList.toggle('selected', true);
         kingdependBtns[3-numColor].classList.toggle('selected',false);
     	}
+    }
+  	pastchessboards[0].onclick = () => {
+    	clearBoard();
+      chessPiecesGrid.style.visibility = "visible";
+      dropdownContainer.style.visibility = "hidden";
+    }
+    for(let numChessBoards = 1; numChessBoards < pastchessboards.length; ++numChessBoards){
+    	pastchessboards[numChessBoards].onclick = () => {
+      	clearBoard();
+        //Get chessboard from database along with AI response and project it
+        chessPiecesGrid.style.visibility = "hidden";
+        dropdownContainer.style.visibility = "hidden";
+      }
     }
 </script>
