@@ -345,6 +345,8 @@
     	clearBoard();
       chessPiecesGrid.style.visibility = "visible";
       dropdownContainer.style.visibility = "hidden";
+      checkTwoKings();
+      kingdependBtns[0].parentElement.style.visibility = "visible";
     });
   
 		pastchessboards[0].parentElement.addEventListener("click", (event) => {
@@ -355,6 +357,7 @@
         //Get chessboard from database along with AI response and project it
         chessPiecesGrid.style.visibility = "hidden";
         dropdownContainer.style.visibility = "hidden";
+      	kingdependBtns[0].parentElement.style.visibility = "hidden";
       }
     });
 </script>
