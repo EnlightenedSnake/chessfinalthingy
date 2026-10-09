@@ -289,40 +289,35 @@
       });
     }
   
-  	chessboard.forEach(chessCol => {
-      chessCol.forEach(chessSquare => {
-        chessSquare.onclick = () => {
-          if(selectedPiece != "none"){
-            if(chessSquare.classList[2].slice(-4) == "king"){
-							kings.set(chessSquare.classList[2], [false,null]);
-            }
-            if(selectedPiece.slice(-4) == "king"){
-              if(kings.get(selectedPiece)[0]){
-            		kings.get(selectedPiece)[1].classList.replace(selectedPiece, "nopiece");
-              }
-              kings.set(selectedPiece, [true, chessSquare]);
-            }
-            checkTwoKings();
-          	chessSquare.classList.replace(chessSquare.classList[2], selectedPiece);
-            unselectPiece();
-          }
-          console.log(chessSquare.id);
+  	chessBoardGrid.addEventListener("click", (event) => {
+      const chessSquare = event.target.closest(".chesssquare");
+      if(selectedPiece != "none"){
+        if(chessSquare.classList[2].slice(-4) == "king"){
+          kings.set(chessSquare.classList[2], [false,null]);
         }
-        chessSquare.oncontextmenu = e => {
-          e.preventDefault();
-        	if(chessSquare.classList[2] != "nopiece"){
-            console.log(chessSquare.classList[2]);
-            selectPiece(chessSquare.classList);
+        if(selectedPiece.slice(-4) == "king"){
+          if(kings.get(selectedPiece)[0]){
+            kings.get(selectedPiece)[1].classList.replace(selectedPiece, "nopiece");
           }
+          kings.set(selectedPiece, [true, chessSquare]);
         }
-      });
+        checkTwoKings();
+        chessSquare.classList.replace(chessSquare.classList[2], selectedPiece);
+        unselectPiece();
+      }
+    	console.log(chessSquare.id);
     });
-  	chesspieces.forEach(color => {
-    	color.forEach(piece => {
-      	piece.onclick = () => {
-					selectPiece(piece.classList);
-        }
-      });
+    chessBoardGrid.addEventListener("contextmenu", (event) => {
+      const chessSquare = event.target.closest(".chesssquare");
+      event.preventDefault();
+      if(chessSquare.classList[2] != "nopiece"){
+        console.log(chessSquare.classList[2]);
+        selectPiece(chessSquare.classList);
+    	}
+    });
+  	chessPiecesGrid.addEventListener("click", (event) => {
+    	const piece = event.target.closest(".chesssquare");
+      if(piece) selectPiece(piece.classList);
     });
   	dropdownBtn.onclick = () => {
       if(dropdownContainer.style.visibility == "hidden"){
