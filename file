@@ -77,7 +77,7 @@
   	src = "whitekingImg";
   }
   .nopiece {
-  	<!-- useless class that is a filler so that it can be replaced with an actual piece -->
+  	/* useless class that is a filler so that it can be replaced with an actual piece */
   }
   .chesspieces-grid {
   	position: relative;
@@ -124,6 +124,7 @@
   }
   .pastchessboarddorpbtn {
   	position: relative;
+    font-size: clamp(.1rem,0.1rem + 1.5vw ,1rem);
   	background-color:yellow;
     width: 24vw;
     height: 4vh;
@@ -146,6 +147,7 @@
     overflow: scroll;
   }
   .pastchessboards {
+  	font-size: clamp(.1rem,0.1rem + 1.5vw ,1rem);
   	position: relative;
   	width: 24vw;
     height: 4vh;
@@ -164,6 +166,7 @@
     background-color:white;
   }
   .askaibtn {
+  	font-size: clamp(.3rem,0.3rem + 1.5vw ,1rem);
   	position:relative;
   	width: 25vw;
     height: 12.5vh;
@@ -174,6 +177,7 @@
     box-shadow: 0 1rem 1rem rgba(29, 51, 84, 0.2);
   }
   .blacksmovebtn,.whitesmovebtn {
+  	font-size: clamp(.1rem,0.1rem + 1.5vw ,1rem);
   	position: relative;
     width: 12.5vw;
     height: 6.25vh;
@@ -184,6 +188,7 @@
   }
   .airesponsetxt {
   	position: relative;
+    font-size: clamp(.3rem,0.3rem + 1.5vw ,1rem); /*Fix when have some data from text responses*/
   	width: 30vw;
     height: 40vh;
     left: 1.5vw;
@@ -287,6 +292,8 @@
         	square.classList.replace(square.classList[2], "nopiece");
         });
       });
+      kings.set("white-king", [false,null]);
+      kings.set("black-king", [false,null]);
     }
   
   	chessBoardGrid.addEventListener("click", (event) => {
@@ -307,6 +314,7 @@
       }
     	console.log(chessSquare.id);
     });
+  
     chessBoardGrid.addEventListener("contextmenu", (event) => {
       const chessSquare = event.target.closest(".chesssquare");
       event.preventDefault();
@@ -315,10 +323,12 @@
         selectPiece(chessSquare.classList);
     	}
     });
+  
   	chessPiecesGrid.addEventListener("click", (event) => {
     	const piece = event.target.closest(".chesssquare");
       if(piece) selectPiece(piece.classList);
     });
+  
   	dropdownBtn.onclick = () => {
       if(dropdownContainer.style.visibility == "hidden"){
      		dropdownContainer.style.visibility = "visible";
@@ -326,6 +336,7 @@
         dropdownContainer.style.visibility = "hidden";
       }
     }
+    
     kingdependBtns[0].onclick = () => {
      	if(selectedColor != "none"){
         let temp = document.createElement("button");
@@ -335,29 +346,32 @@
       	//ai button stuff 
       }
     }
+    
     for(let numColor = 1; numColor < 3; ++numColor){
     	kingdependBtns[numColor].onclick = () => {
     	 	kingdependBtns[numColor].classList.toggle('selected', true);
         kingdependBtns[3-numColor].classList.toggle('selected',false);
+        selectedColor = kingdependBtns[numColor].innerText;
     	}
     }
-  	pastchessboards[0].addEventListener("click", () => {
-    	clearBoard();
-      chessPiecesGrid.style.visibility = "visible";
-      dropdownContainer.style.visibility = "hidden";
-      checkTwoKings();
-      kingdependBtns[0].parentElement.style.visibility = "visible";
-    });
   
 		pastchessboards[0].parentElement.addEventListener("click", (event) => {
-    const button = event.target.closest(".pastchessboards");
-    console.log(button);
-    if(button && button != pastchessboards[0]){
-      	clearBoard();
-        //Get chessboard from database along with AI response and project it
-        chessPiecesGrid.style.visibility = "hidden";
-        dropdownContainer.style.visibility = "hidden";
-      	kingdependBtns[0].parentElement.style.visibility = "hidden";
+      const button = event.target.closest(".pastchessboards");
+      console.log(button);
+      if(button){
+        if(button == pastchessboards[0]){
+          clearBoard();
+      		chessPiecesGrid.style.visibility = "visible";
+      		dropdownContainer.style.visibility = "hidden";
+      		checkTwoKings();
+      		kingdependBtns[0].parentElement.style.visibility = "visible";
+        } else {
+          clearBoard();
+          //Get chessboard from database along with AI response and project it
+          chessPiecesGrid.style.visibility = "hidden";
+          dropdownContainer.style.visibility = "hidden";
+          kingdependBtns[0].parentElement.style.visibility = "hidden";
+        }
       }
     });
 </script>
