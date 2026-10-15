@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Chess Application</title>
+        <link rel="stylesheet" href="style.css"/>
+        <script src="app.js" defer></script>
+    </head>
+    <body>
+        <div class="chessboard-container">
+            <div class="chessboard-grid"></div>
+        </div>
+        <div class="chesspieces-container">
+            <div class="chesspieces-grid"></div>
+        </div>
+        <div class="AI-container">
+            <button class="pastchessboarddorpbtn">Look at past positions!</button>
+            <div class="dropdown-container">
+            <button class="pastchessboards">Create a new position!</button>
+            </div>
+            <div class ="kingdependentbtns-container">
+                <button disabled class="askaibtn">Ask AI What the Best Move is!</button>
+                <button disabled class="blacksmovebtn">Black</button>
+                <button disabled class="whitesmovebtn">White</button>
+            </div>
+            <div class="airesponsetxt"></div>
+        </div>
+    </body>
+</html>

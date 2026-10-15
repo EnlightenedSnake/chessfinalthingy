@@ -1,0 +1,200 @@
+*, *::before, *::after { 
+    box-sizing: border-box; 
+    margin:0; 
+}
+  body {
+  	font-size: min(10vh,10vw);
+  }
+  .chessboard-container {
+  	position: absolute;
+  	background-color:#404040;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:67vw;
+    height:75vh;
+  }
+  .chesspieces-container {
+  	position: absolute;
+  	background: radial-gradient(#6c6c6c,#5f5f5f,#404040);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:67vw;
+    height:25vh;
+    top:75vh;
+  }
+  .chesssquare {
+  	position: relative;
+    display: flex;
+    width: min(8vh,8vw);
+    height: min(8vh,8vw);
+    border: none;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .black {
+  	background-color: #572400;
+    color: white;
+  }
+  .white {
+  	background-color: #fab37f;
+    color: black;
+  }
+  .black-pawn {
+  	background-image: url("pieceImages/black-pawn.png");
+  }
+  .black-knight {
+  	background-image: url("pieceImages/black-knight.png");
+  }
+  .black-bishop {
+  	background-image: url("pieceImages/black-bishop.png");
+  }
+  .black-rook {
+  	background-image: url("pieceImages/black-rook.png");
+  }
+  .black-queen {
+  	background-image: url("pieceImages/black-queen.png");
+  }
+  .black-king {
+  	background-image: url("pieceImages/black-king.png");
+  }
+  .white-pawn {
+  	background-image: url("pieceImages/white-pawn.png");
+  }
+  .white-knight {
+  	background-image: url("pieceImages/white-knight.png");
+  }
+  .white-bishop {
+  	background-image: url("pieceImages/white-bishop.png");
+  }
+  .white-rook {
+  	background-image: url("pieceImages/white-rook.png");
+  }
+  .white-queen {
+  	background-image: url("pieceImages/white-queen.png");
+  }
+  .white-king {
+  	background-image: url("pieceImages/white-king.png");
+  }
+  .nopiece {
+    background-image: none;
+  }
+  .chesspieces-grid {
+  	position: relative;
+    display: inline-flex;
+    flex-wrap: wrap;
+  	background-color: #989797;
+  	width: min(67vw,67vh);
+  	height: min(21vw,21vh);
+  	gap: min(3.5vw,3.5vh);
+    padding:min(0.75vh,0.75vw);
+  }
+  .chessboard-number {
+  	position: absolute;
+    width: 30%;
+    height: 30%;
+    font-size: min(1.75vh,1.75vw);
+    top: 5%;
+    left: -2.5%;
+  	pointer-events: none;
+  }
+  .chessboard-letter {
+  	position: absolute;
+    width: 30%;
+    height: 30%;
+    font-size: min(1.75vh,1.75vw);
+    right: 5%;
+    bottom: 0%;
+  	pointer-events: none;
+    
+  }
+  .chessboard-grid {
+  	position: relative;
+    display: inline-flex;
+    flex-wrap: wrap;
+    background-color:#595959;
+    width: min(64vw,64vh);
+    height: min(64vw,64vh);
+  }
+  .AI-container {
+  	position: absolute;
+  	background-color:#747474;
+    width:33vw;
+    height:100vh;
+    left:67vw;
+  }
+  .pastchessboarddorpbtn {
+  	position: relative;
+    font-size: clamp(.1rem,0.1rem + 1.5vw ,1rem);
+  	background-color:yellow;
+    width: 24vw;
+    height: 4vh;
+    left:4.5vw;
+    border: none;
+  }
+  .dropdown-container {
+  	position: relative;
+  	display: flex;
+    flex-wrap: wrap;
+  	justify-content: flex-start;
+  	align-content: flex-start;
+    visibility: hidden;
+  	left: 4.5vw;
+    top: -1vh;
+  	width: 24vw;
+    height: 20vh;
+    background-color: white;
+    overflow-x: hidden;
+  }
+  .pastchessboards {
+  	font-size: clamp(.1rem,0.1rem + 1.5vw ,1rem);
+  	position: relative;
+  	width: 24vw;
+    height: 4vh;
+  }
+  button:disabled {
+  	opacity: 0.7;
+    cursor: not-allowed;
+  }
+  .kingdependentbtns-container {
+  	display: flex;
+    flex-wrap: wrap;
+  	position: relative;
+    width: 25vw;
+    height: 18.75vh;
+    left:4vw;
+    background-color:white;
+    overflow-x: hidden;
+  }
+  .askaibtn {
+  	font-size: clamp(.3rem,0.3rem + 1.5vw ,1rem);
+  	position:relative;
+  	width: 25vw;
+    height: 12.5vh;
+  }
+  .selected {
+  	font-weight: bold;
+  	transform: translateY(-0.1rem);
+    box-shadow: 0 1rem 1rem rgba(29, 51, 84, 0.2);
+  }
+  .blacksmovebtn,.whitesmovebtn {
+  	font-size: clamp(.1rem,0.1rem + 1.5vw ,1rem);
+  	position: relative;
+    width: 12.5vw;
+    height: 6.25vh;
+  }
+  .blacksmovebtn {
+  	background-color: black;
+    color: white;
+  }
+  .airesponsetxt {
+  	position: relative;
+    font-size: clamp(.3rem,0.3rem + 1.5vw ,1rem); /*Fix when have some data from text responses*/
+  	width: 30vw;
+    height: 40vh;
+    left: 1.5vw;
+    top: 5vh;
+    background-color:white;
+  }
