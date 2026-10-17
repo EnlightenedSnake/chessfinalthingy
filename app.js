@@ -5,12 +5,13 @@ const chessBoardGrid = document.getElementsByClassName("chessboard-grid")[0],
           pastchessboards = document.getElementsByClassName("pastchessboards"),
           kingdependBtns = Array.from(document.getElementsByClassName("kingdependentbtns-container")[0].children),
           aiTxt = document.getElementsByClassName("airesponsetxt")[0],
-    			typeNameMap = new Map([["white-pawn",[0,0]],["white-knight",[0,1]],["white-bishop",[0,2]],["white-rook",[0,3]],["white-queen",[0,4]],["white-king",[0,5]],["black-pawn",[1,0]],["black-knight",[1,1]],["black-bishop",[1,2]],["black-rook",[1,3]],["black-queen",[1,4]],["black-king",[1,5]]]);
-  			var chessboard = [[],[],[],[],[],[],[],[]],
-            chesspieces= [[],[]],
-            selectedPiece = "none",
-            selectedColor = "none",
-            kings = new Map([["white-king",[false,null]],["black-king",[false,null]]]);
+    	typeNameMap = new Map([["white-pawn",[0,0]],["white-knight",[0,1]],["white-bishop",[0,2]],["white-rook",[0,3]],["white-queen",[0,4]],["white-king",[0,5]],["black-pawn",[1,0]],["black-knight",[1,1]],["black-bishop",[1,2]],["black-rook",[1,3]],["black-queen",[1,4]],["black-king",[1,5]]]);
+var chessboard = [[],[],[],[],[],[],[],[]],
+        chesspieces= [[],[]],
+        selectedPiece = "none",
+        selectedColor = "none",
+        kings = new Map([["white-king",[false,null]],["black-king",[false,null]]]);
+
 for(let chessRow = 0; chessRow < 8; ++chessRow){
     for(let chessCol = 0, letters = ["a","b","c","d","e","f","g","h"]; chessCol < 8; ++chessCol){
         chessboard[chessCol][chessRow] = document.createElement("button");
@@ -83,9 +84,7 @@ function viewOnlyScreen(){
 chessBoardGrid.addEventListener("click", (event) => {
     const chessSquare = event.target.closest(".chesssquare");
     if(selectedPiece != "none"){
-        if(chessSquare.classList[2].slice(-4) == "king"){
-            kings.set(chessSquare.classList[2], [false,null]);
-        }
+        if(chessSquare.classList[2].slice(-4) == "king") kings.set(chessSquare.classList[2], [false,null]);
         if(selectedPiece.slice(-4) == "king"){
             if(kings.get(selectedPiece)[0]) kings.get(selectedPiece)[1].classList.replace(selectedPiece, "nopiece");
             kings.set(selectedPiece, [true, chessSquare]);
@@ -103,6 +102,19 @@ chessBoardGrid.addEventListener("contextmenu", (event) => {
     if(chessSquare.classList[2] != "nopiece"){
         console.log(chessSquare.classList[2]);
         selectPiece(chessSquare.classList);
+    }
+});
+
+chessBoardGrid.addEventListener("auxclick", (event) => {
+    if(event.button != 1) return;
+    const chessSquare = event.target.closest(".chesssquare");
+    event.preventDefault();
+    if(chessSquare.classList[2] != "nopiece"){
+        if(chessSquare.classList[2].slice(-4) == "king") {
+            kings.set(chessSquare.classList[2], [false,null]);
+            checkTwoKings();
+        }
+        chessSquare.classList.replace(chessSquare.classList[2], "nopiece");
     }
 });
 
